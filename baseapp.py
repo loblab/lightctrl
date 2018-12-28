@@ -1,19 +1,34 @@
+import os
+import sys
+import time
+import signal
 import logging
 import argparse
 
 class BaseApp:
 
-    def __init__(self, description, version):
-        self.argps = argparse.ArgumentParser(description=description)
-        self.argps.add_argument('-V', '--version', action='version', version=version)
-        self.argps.add_argument('-D', '--debug', action='store_true', help="show debug messages")
+    def __init__(self, desc, ver_num):
+        signal.signal(signal.SIGINT, self.sig_handler)
+        signal.signal(signal.SIGTERM, self.sig_handler)
+        self.quit_flag = False
+        sfile = sys.argv[0]
+        ver = ("Ver %s, " % ver_num) + time.strftime("%Y/%m/%d %H:%M %Z, loblab",
+            time.localtime(os.path.getmtime(sfile)))
+        self.argps = argparse.ArgumentParser(description=desc)
+        self.argps.add_argument('-V', '--version', action='version', version=ver)
+        self.argps.add_argument('-D', '--debug', action='store_true',
+                help="Output more logs (debug level)")
         self.init_args()
         self.args = self.argps.parse_args()
         self.init_logger()
-        self.log.info(description)
-        self.log.info(version)
+        self.log.info(desc)
+        self.log.info(ver)
         if self.args.debug:
             self.log.debug("Debug: on")
+
+    def sig_handler(self, signum, frame):
+        self.log.info("Got signal %d" % signum)
+        self.quit_flag = True
 
     def init_args(self):
         pass
