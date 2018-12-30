@@ -28,18 +28,15 @@ class LightApp(BaseApp):
 
     def init_args(self):
         self.argps.add_argument('-d', '--device', dest='device', type=str, default=self.DEFAULT_DEVICE,
-                help="light control device port. default: '%s'" % self.DEFAULT_DEVICE)
+                help="light controller device port. default: '%s'" % self.DEFAULT_DEVICE)
         self.argps.add_argument('-t', '--type', dest='type', type=str, default=self.DEFAULT_TYPE,
                 choices=self.CTRLS.keys(),
-                help="light control device type. default: '%s'" % self.DEFAULT_TYPE)
+                help="light controller device type. default: '%s'" % self.DEFAULT_TYPE)
         self.argps.add_argument('-b', '--baudrate', dest='baudrate', type=int,
                 default=self.DEFAULT_BAUDRATE,
                 help="baudrate. default: %d" % self.DEFAULT_BAUDRATE)
-        self.argps.add_argument('-v', '--verify', dest='verify', type=float,
-                default=self.DEFAULT_VERIFY,
-                help="verify flag & delay (in second). <0: no verify; >=0: wait the time & verify. default: %f" % self.DEFAULT_VERIFY)
         self.argps.add_argument('-w', '--wait', dest='wait', type=float, default=self.DEFAULT_INTERVAL,
-                help="interval of 2 commands. default: %.3f(second)" % self.DEFAULT_INTERVAL)
+                help="interval between 2 commands. default: %.3f(second)" % self.DEFAULT_INTERVAL)
         self.argps.add_argument('-c', '--channel', dest='channel', type=int,
                 default=self.DEFAULT_CHANNEL,
                 help="the channel to be tested. default: %d" % self.DEFAULT_CHANNEL)
@@ -93,6 +90,6 @@ class LightApp(BaseApp):
         return 0
 
 if __name__ == "__main__":
-    app = LightApp("Light control test program", "0.1")
+    app = LightApp("Light controller test program", "0.1")
     app.main()
 
