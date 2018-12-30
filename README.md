@@ -6,7 +6,8 @@ Test command speed & delay.
 
 - Platform: Linux (Raspberry Pi), Python 2.x/3.x
 - Ver: 0.1
-- Ref: [Testing method & report of some light controllers (Chinese)](https://www.jianshu.com/u/3c1a902a844b)
+- Ref: [Testing method & report of some light controllers
+  (Chinese)](https://www.jianshu.com/p/d70e967fab84)
 - Updated: 12/30/2018
 - Created: 12/27/2018
 - Author: loblab
